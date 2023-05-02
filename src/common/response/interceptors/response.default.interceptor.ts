@@ -82,7 +82,7 @@ export class ResponseDefaultInterceptor<T> implements NestInterceptor<Promise<T>
 
           if (responseData) {
             const { _metadata } = responseData;
-            data = responseData.data;
+            data = responseData;
 
             if (data && classSerialization) {
               data = plainToInstance(classSerialization, data, classSerializationOptions);

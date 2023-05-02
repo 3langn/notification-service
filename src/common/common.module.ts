@@ -8,7 +8,6 @@ import { APP_LANGUAGE } from "src/app/constants/app.constant";
 import { ENUM_APP_ENVIRONMENT } from "src/app/constants/app.enum.constant";
 import { ErrorModule } from "src/common/error/error.module";
 import { HelperModule } from "src/common/helper/helper.module";
-import { LoggerModule } from "src/common/logger/logger.module";
 import { PaginationModule } from "src/common/pagination/pagination.module";
 import { RequestModule } from "src/common/request/request.module";
 import { ResponseModule } from "src/common/response/response.module";
@@ -87,7 +86,6 @@ import { DebuggerModule } from "./debugger/debugger.module";
     ErrorModule,
     ResponseModule,
     RequestModule,
-    LoggerModule,
   ],
 })
 export class CommonModule {}

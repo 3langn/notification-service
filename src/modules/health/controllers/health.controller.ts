@@ -1,10 +1,10 @@
 import { Controller, Get } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 
-import { ENUM_LOGGER_ACTION } from "../../../common/logger/constants/logger.enum.constant";
-import { Logger } from "../../../common/logger/decorators/logger.decorator";
+import { Response } from "../../../common/response/decorators/response.decorator";
 import { ApiConfigService } from "../../../shared/services/api-config.service";
 import { HealthCheckDoc } from "../docs/heath.doc";
+import { HealtchCheckResponseDto } from "../dto/heath.dto";
 
 @ApiTags("health")
 @Controller("/health")
@@ -12,7 +12,9 @@ export class HealthController {
   constructor(private readonly configService: ApiConfigService) {}
 
   @HealthCheckDoc()
-  @Logger(ENUM_LOGGER_ACTION.TEST, { tags: ["test"] })
+  @Response("heath.check", {
+    serialization: HealtchCheckResponseDto,
+  })
   @Get()
   getHello() {
     return {
