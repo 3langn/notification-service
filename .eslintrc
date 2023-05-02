@@ -1,0 +1,83 @@
+{
+  // Configuration for JavaScript files
+  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": false,
+        "endOfLine": "auto"
+      }
+    ]
+  },
+  "overrides": [
+    // Configuration for TypeScript files
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "plugins": [
+        // "@typescript-eslint",
+        "unused-imports",
+        "simple-import-sort"
+      ],
+      "extends": ["airbnb-typescript", "plugin:prettier/recommended"],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "prefer-regex-literals": "off",
+        "no-useless-catch": "off",
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": false,
+            "endOfLine": "auto"
+          }
+        ],
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "warn",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "@typescript-eslint/no-useless-constructor": "off",
+        "import/no-cycle": "off",
+        "class-methods-use-this": "off",
+        "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
+        "@typescript-eslint/consistent-type-imports": "error", // Ensure `import type` is used when it's necessary
+        "import/prefer-default-export": "off", // Named export is easier to refactor automatically
+        "simple-import-sort/imports": "error", // Import configuration for `eslint-plugin-simple-import-sort`
+        "simple-import-sort/exports": "error", // Export configuration for `eslint-plugin-simple-import-sort`
+        "@typescript-eslint/no-unused-vars": "off",
+        "import/no-mutable-exports": "off",
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/no-shadow": "off",
+        "no-console": "off",
+        "no-param-reassign": "off",
+        "no-shadow": "off",
+        "react/jsx-filename-extension": "off",
+        "consistent-return": "off",
+        "no-restricted-syntax": "off",
+        "no-await-in-loop": "off",
+        "no-alert": "off",
+        "no-continue": "off",
+        "no-underscore-dangle": "off",
+        "no-unsafe-optional-chaining": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/default-param-last": "off",
+        "max-classes-per-file": ["error", { "ignoreExpressions": true, "max": 4 }],
+        "no-plusplus": [
+          "error",
+          {
+            "allowForLoopAfterthoughts": true
+          }
+        ],
+        "no-nested-ternary": "off",
+        "no-useless-escape": "off"
+      }
+    }
+  ]
+}
