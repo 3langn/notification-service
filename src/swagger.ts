@@ -9,16 +9,16 @@ import { ApiConfigService } from "./shared/services/api-config.service";
 import { SharedModule } from "./shared/shared.module";
 
 export default async function swaggerInit(app: INestApplication) {
+  const logger = new Logger("Swagger");
+
   const configService = app.select(SharedModule).get(ApiConfigService);
 
   const { env } = configService.appConfig;
-  const logger = new Logger();
 
   const docName: string = configService.docsConfig.docsName;
   const docDesc: string = configService.docsConfig.docsDescription;
   const docVersion: string = configService.docsConfig.docsVersion;
   const docPrefix: string = configService.docsConfig.docsPrefix;
-  const { host } = configService.appConfig;
 
   if (env !== ENUM_APP_ENVIRONMENT.PRODUCTION) {
     const documentBuild = new DocumentBuilder()

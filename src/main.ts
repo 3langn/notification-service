@@ -1,6 +1,7 @@
 import {
   ClassSerializerInterceptor,
   HttpStatus,
+  Logger,
   UnprocessableEntityException,
   ValidationPipe,
 } from "@nestjs/common";
@@ -8,7 +9,6 @@ import { NestFactory, Reflector } from "@nestjs/core";
 import { Transport } from "@nestjs/microservices";
 import * as compression from "compression";
 import rateLimit from "express-rate-limit";
-import { logger } from "nestjs-i18n";
 
 import { AppModule } from "./app.module";
 import { ApiConfigService } from "./shared/services/api-config.service";
@@ -16,6 +16,8 @@ import { SharedModule } from "./shared/shared.module";
 import swaggerInit from "./swagger";
 
 async function bootstrap() {
+  const logger = new Logger("Main");
+
   // initializeTransactionalContext();
   // patchTypeORMRepositoryWithBaseRepository();
 

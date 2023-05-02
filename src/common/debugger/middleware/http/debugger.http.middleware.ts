@@ -2,19 +2,16 @@ import type { NestMiddleware } from "@nestjs/common";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import type { NextFunction, Request, Response } from "express";
-import morgan from "morgan";
+import * as morgan from "morgan";
 import { HttpConsoleLogger } from "src/common/debugger/constants/debugger.constant";
 import type { IDebuggerHttpMiddleware } from "src/common/debugger/interfaces/debugger.interface";
 
 @Injectable()
 export class DebuggerHttpMiddleware implements NestMiddleware {
-  private readonly writeIntoFile: boolean;
-
-  private readonly writeIntoConsole: boolean;
+  private readonly debug: boolean;
 
   constructor(private readonly configService: ConfigService) {
-    this.writeIntoFile = this.configService.get<boolean>("debugger.http.writeIntoFile");
-    this.writeIntoConsole = this.configService.get<boolean>("debugger.http.writeIntoConsole");
+    this.debug = this.configService.get<boolean>("APP_DEBUG");
   }
 
   private customToken(): void {
@@ -28,7 +25,7 @@ export class DebuggerHttpMiddleware implements NestMiddleware {
   }
 
   async use(req: Request, res: Response, next: NextFunction): Promise<void> {
-    if (this.writeIntoConsole || this.writeIntoFile) {
+    if (this.debug) {
       this.customToken();
     }
 
@@ -43,7 +40,7 @@ export class DebuggerHttpWriteIntoConsoleMiddleware implements NestMiddleware {
   private readonly httpConsoleLogger: HttpConsoleLogger = new HttpConsoleLogger();
 
   constructor(private readonly configService: ConfigService) {
-    this.writeIntoConsole = this.configService.get<boolean>("debugger.http.writeIntoConsole");
+    this.writeIntoConsole = this.configService.get<boolean>("APP_DEBUG");
   }
 
   // private async httpLogger(): Promise<IDebuggerHttpConfig> {
