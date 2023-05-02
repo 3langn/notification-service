@@ -1,10 +1,10 @@
-import { faker } from '@faker-js/faker';
-import { ApiProperty, PickType } from '@nestjs/swagger';
-import { PAGINATION_AVAILABLE_ORDER_DIRECTION } from 'src/common/pagination/constants/pagination.constant';
-import { ENUM_PAGINATION_ORDER_DIRECTION_TYPE } from 'src/common/pagination/constants/pagination.enum.constant';
-import { RequestPaginationSerialization } from 'src/common/request/serializations/request.pagination.serialization';
-import type { ResponseMetadataSerialization } from 'src/common/response/serializations/response.default.serialization';
-import { ResponseDefaultSerialization } from 'src/common/response/serializations/response.default.serialization';
+import { faker } from "@faker-js/faker";
+import { ApiProperty, PickType } from "@nestjs/swagger";
+import { PAGINATION_AVAILABLE_ORDER_DIRECTION } from "src/common/pagination/constants/pagination.constant";
+import { ENUM_PAGINATION_ORDER_DIRECTION_TYPE } from "src/common/pagination/constants/pagination.enum.constant";
+import { RequestPaginationSerialization } from "src/common/request/serializations/request.pagination.serialization";
+import type { ResponseMetadataSerialization } from "src/common/response/serializations/response.default.serialization";
+import { ResponseDefaultSerialization } from "src/common/response/serializations/response.default.serialization";
 
 export class ResponsePaginationCursorSerialization {
   nextPage: string;
@@ -29,30 +29,30 @@ export interface ResponsePagingMetadataSerialization extends ResponseMetadataSer
 
 export class ResponsePagingSerialization<T = Record<string, any>> extends PickType(
   ResponseDefaultSerialization,
-  ['statusCode', 'message'] as const,
+  ["statusCode", "message"] as const,
 ) {
   @ApiProperty({
-    name: '_metadata',
+    name: "_metadata",
     nullable: false,
-    description: 'Contain metadata about API',
-    type: 'object',
+    description: "Contain metadata about API",
+    type: "object",
     required: true,
     example: {
-      languages: ['en'],
+      languages: ["en"],
       timestamp: 1660190937231,
-      timezone: 'Asia/Jakarta',
-      requestId: '40c2f734-7247-472b-bc26-8eff6e669781',
-      path: '/api/v1/test/hello',
-      version: '1',
-      repoVersion: '1.0.0',
+      timezone: "Asia/Jakarta",
+      requestId: "40c2f734-7247-472b-bc26-8eff6e669781",
+      path: "/api/v1/test/hello",
+      version: "1",
+      repoVersion: "1.0.0",
       pagination: {
         search: faker.name.firstName(),
         page: 1,
         perPage: 20,
-        orderBy: 'createdAt',
+        orderBy: "createdAt",
         orderDirection: ENUM_PAGINATION_ORDER_DIRECTION_TYPE.ASC,
-        availableSearch: ['name'],
-        availableOrderBy: ['createdAt'],
+        availableSearch: ["name"],
+        availableOrderBy: ["createdAt"],
         availableOrderDirection: PAGINATION_AVAILABLE_ORDER_DIRECTION,
         total: 100,
         totalPage: 5,

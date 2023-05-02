@@ -1,40 +1,38 @@
-import {
-    Injectable,
-    CanActivate,
-    ExecutionContext,
-    BadRequestException,
-} from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { ClassConstructor, plainToInstance } from 'class-transformer';
-import { validate, ValidationError } from 'class-validator';
-import { REQUEST_PARAM_CLASS_DTOS_META_KEY } from 'src/common/request/constants/request.constant';
-import { ENUM_REQUEST_STATUS_CODE_ERROR } from 'src/common/request/constants/request.status-code.constant';
+import type { CanActivate, ExecutionContext } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
+import type { ClassConstructor } from "class-transformer";
+import { plainToInstance } from "class-transformer";
+import type { ValidationError } from "class-validator";
+import { validate } from "class-validator";
+import { REQUEST_PARAM_CLASS_DTOS_META_KEY } from "src/common/request/constants/request.constant";
+import { ENUM_REQUEST_STATUS_CODE_ERROR } from "src/common/request/constants/request.status-code.constant";
 
 @Injectable()
 export class RequestParamRawGuard implements CanActivate {
-    constructor(private readonly reflector: Reflector) {}
+  constructor(private readonly reflector: Reflector) {}
 
-    async canActivate(context: ExecutionContext): Promise<boolean> {
-        const { params } = context.switchToHttp().getRequest();
-        const classDtos: ClassConstructor<any>[] = this.reflector.get<
-            ClassConstructor<any>[]
-        >(REQUEST_PARAM_CLASS_DTOS_META_KEY, context.getHandler());
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const { params } = context.switchToHttp().getRequest();
+    const classDtos: ClassConstructor<any>[] = this.reflector.get<ClassConstructor<any>[]>(
+      REQUEST_PARAM_CLASS_DTOS_META_KEY,
+      context.getHandler(),
+    );
 
-        for (const clsDto of classDtos) {
-            const request = plainToInstance(clsDto, params);
+    for (const clsDto of classDtos) {
+      const request = plainToInstance(clsDto, params);
 
-            const errors: ValidationError[] = await validate(request);
+      const errors: ValidationError[] = await validate(request);
 
-            if (errors.length > 0) {
-                throw new BadRequestException({
-                    statusCode:
-                        ENUM_REQUEST_STATUS_CODE_ERROR.REQUEST_VALIDATION_ERROR,
-                    message: 'http.clientError.badRequest',
-                    errors: errors,
-                });
-            }
-        }
-
-        return true;
+      if (errors.length > 0) {
+        throw new BadRequestException({
+          statusCode: ENUM_REQUEST_STATUS_CODE_ERROR.REQUEST_VALIDATION_ERROR,
+          message: "http.clientError.badRequest",
+          errors,
+        });
+      }
     }
+
+    return true;
+  }
 }

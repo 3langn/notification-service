@@ -1,38 +1,32 @@
-import { Injectable } from '@nestjs/common';
-import {
-    registerDecorator,
-    ValidationArguments,
-    ValidationOptions,
-    ValidatorConstraint,
-    ValidatorConstraintInterface,
-} from 'class-validator';
-import { HelperStringService } from 'src/common/helper/services/helper.string.service';
+import { Injectable } from "@nestjs/common";
+import type {
+  ValidationArguments,
+  ValidationOptions,
+  ValidatorConstraintInterface,
+} from "class-validator";
+import { registerDecorator, ValidatorConstraint } from "class-validator";
+import { HelperStringService } from "src/common/helper/services/helper.string.service";
 
 @ValidatorConstraint({ async: true })
 @Injectable()
 export class IsPasswordWeakConstraint implements ValidatorConstraintInterface {
-    constructor(protected readonly helperStringService: HelperStringService) {}
+  constructor(protected readonly helperStringService: HelperStringService) {}
 
-    validate(value: string, args: ValidationArguments): boolean {
-        const [length] = args.constraints;
-        return value
-            ? this.helperStringService.checkPasswordMedium(value, length)
-            : false;
-    }
+  validate(value: string, args: ValidationArguments): boolean {
+    const [length] = args.constraints;
+    return value ? this.helperStringService.checkPasswordMedium(value, length) : false;
+  }
 }
 
-export function IsPasswordWeak(
-    minLength = 8,
-    validationOptions?: ValidationOptions
-) {
-    return function (object: Record<string, any>, propertyName: string): void {
-        registerDecorator({
-            name: 'IsPasswordWeak',
-            target: object.constructor,
-            propertyName: propertyName,
-            options: validationOptions,
-            constraints: [minLength],
-            validator: IsPasswordWeakConstraint,
-        });
-    };
+export function IsPasswordWeak(minLength = 8, validationOptions?: ValidationOptions) {
+  return function (object: Record<string, any>, propertyName: string): void {
+    registerDecorator({
+      name: "IsPasswordWeak",
+      target: object.constructor,
+      propertyName,
+      options: validationOptions,
+      constraints: [minLength],
+      validator: IsPasswordWeakConstraint,
+    });
+  };
 }

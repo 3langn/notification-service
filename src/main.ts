@@ -6,7 +6,6 @@ import {
   ValidationPipe,
 } from "@nestjs/common";
 import { NestFactory, Reflector } from "@nestjs/core";
-import { Transport } from "@nestjs/microservices";
 import * as compression from "compression";
 import rateLimit from "express-rate-limit";
 
@@ -27,16 +26,16 @@ async function bootstrap() {
 
   const configService = app.select(SharedModule).get(ApiConfigService);
 
-  const _ = app.connectMicroservice({
-    transport: Transport.RMQ,
-    options: {
-      urls: [configService.rabbitmqConfig.uri],
-      queue: configService.rabbitmqConfig.queueName,
-      queueOptions: { durable: false },
-    },
-  });
+  // const _ = app.connectMicroservice({
+  //   transport: Transport.RMQ,
+  //   options: {
+  //     urls: [configService.rabbitmqConfig.uri],
+  //     queue: configService.rabbitmqConfig.queueName,
+  //     queueOptions: { durable: false },
+  //   },
+  // });
 
-  await app.startAllMicroservices();
+  // await app.startAllMicroservices();
 
   // requestMiddlewareModuleConfig(app);
   app.setGlobalPrefix(configService.appConfig.prefix);
@@ -71,7 +70,7 @@ async function bootstrap() {
   logger.log(`Http versioning is ${configService.appConfig.version}`);
   logger.log(`Database uri ${configService.mongoConfig.uri}`);
 
-  logger.log(`Http Server running on ${await app.getUrl()}`);
+  logger.log(`Http Server running on ${await app.getUrl()} 🚀`);
   logger.log(`==========================================================`);
 }
 bootstrap();

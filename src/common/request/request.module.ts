@@ -1,8 +1,8 @@
 import type { ValidationError } from "@nestjs/common";
 import { HttpStatus, Module, UnprocessableEntityException, ValidationPipe } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
-import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
+import { APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
+import { ThrottlerModule } from "@nestjs/throttler";
 import { RequestTimeoutInterceptor } from "src/common/request/interceptors/request.timeout.interceptor";
 import { RequestMiddlewareModule } from "src/common/request/middleware/request.middleware.module";
 import { MaxBinaryFileConstraint } from "src/common/request/validations/request.max-binary-file.validation";
@@ -48,10 +48,10 @@ import { SkipConstraint } from "./validations/request.skip.validation";
             }),
         }),
     },
-    {
-      provide: APP_GUARD,
-      useClass: ThrottlerGuard,
-    },
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: ThrottlerGuard,
+    // },
     IsPasswordStrongConstraint,
     IsPasswordMediumConstraint,
     IsPasswordWeakConstraint,

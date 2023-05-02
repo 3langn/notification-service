@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 import {
   PAGINATION_AVAILABLE_ORDER_BY,
   PAGINATION_MAX_PAGE,
@@ -7,9 +7,9 @@ import {
   PAGINATION_ORDER_DIRECTION,
   PAGINATION_PAGE,
   PAGINATION_PER_PAGE,
-} from 'src/common/pagination/constants/pagination.constant';
-import type { IPaginationOrder } from 'src/common/pagination/interfaces/pagination.interface';
-import type { IPaginationService } from 'src/common/pagination/interfaces/pagination.service.interface';
+} from "src/common/pagination/constants/pagination.constant";
+import type { IPaginationOrder } from "src/common/pagination/interfaces/pagination.interface";
+import type { IPaginationService } from "src/common/pagination/interfaces/pagination.service.interface";
 
 @Injectable()
 export class PaginationService implements IPaginationService {
@@ -62,7 +62,7 @@ export class PaginationService implements IPaginationService {
     return { [orderBy]: orderDirectionValue };
   }
 
-  search(searchValue = '', availableSearch: string[]): Record<string, any> | undefined {
+  search(searchValue = "", availableSearch: string[]): Record<string, any> | undefined {
     if (!searchValue) {
       return undefined;
     }
@@ -71,7 +71,7 @@ export class PaginationService implements IPaginationService {
       $or: availableSearch.map((val) => ({
         [val]: {
           $regex: new RegExp(searchValue),
-          $options: 'i',
+          $options: "i",
         },
       })),
     };
@@ -88,7 +88,7 @@ export class PaginationService implements IPaginationService {
     return {
       [field]: {
         $regex: new RegExp(filterValue),
-        $options: 'i',
+        $options: "i",
       },
     };
   }
@@ -100,7 +100,7 @@ export class PaginationService implements IPaginationService {
     return {
       [field]: {
         $regex: new RegExp(`\\b${filterValue}\\b`),
-        $options: 'i',
+        $options: "i",
       },
     };
   }

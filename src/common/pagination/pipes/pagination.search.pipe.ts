@@ -1,10 +1,10 @@
-import type { Type } from '@nestjs/common';
-import { Inject, Injectable, mixin } from '@nestjs/common';
-import type { PipeTransform } from '@nestjs/common/interfaces';
-import { Scope } from '@nestjs/common/interfaces';
-import { REQUEST } from '@nestjs/core';
-import { PaginationService } from 'src/common/pagination/services/pagination.service';
-import { IRequestApp } from 'src/common/request/interfaces/request.interface';
+import type { Type } from "@nestjs/common";
+import { Inject, Injectable, mixin } from "@nestjs/common";
+import type { PipeTransform } from "@nestjs/common/interfaces";
+import { Scope } from "@nestjs/common/interfaces";
+import { REQUEST } from "@nestjs/core";
+import { PaginationService } from "src/common/pagination/services/pagination.service";
+import { IRequestApp } from "src/common/request/interfaces/request.interface";
 
 export function PaginationSearchPipe(availableSearch: string[]): Type<PipeTransform> {
   @Injectable({ scope: Scope.REQUEST })
@@ -15,7 +15,7 @@ export function PaginationSearchPipe(availableSearch: string[]): Type<PipeTransf
     ) {}
 
     async transform(value: Record<string, any>): Promise<Record<string, any>> {
-      const searchText = value?.search ?? '';
+      const searchText = value?.search ?? "";
       const search: Record<string, any> = this.paginationService.search(
         value?.search,
         availableSearch,

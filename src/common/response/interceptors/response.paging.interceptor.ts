@@ -22,7 +22,7 @@ import type {
   ResponsePagingSerialization,
 } from "src/common/response/serializations/response.paging.serialization";
 
-import { MessageService } from "../../../modules/message/services/message.service";
+import { MessageService } from "../../../modules/rmq/services/rmq.service";
 
 @Injectable()
 export class ResponsePagingInterceptor<T> implements NestInterceptor<Promise<T>> {

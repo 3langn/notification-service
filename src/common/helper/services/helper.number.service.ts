@@ -1,6 +1,6 @@
-import { faker } from '@faker-js/faker';
-import { Injectable } from '@nestjs/common';
-import type { IHelperNumberService } from 'src/common/helper/interfaces/helper.number-service.interface';
+import { faker } from "@faker-js/faker";
+import { Injectable } from "@nestjs/common";
+import type { IHelperNumberService } from "src/common/helper/interfaces/helper.number-service.interface";
 
 @Injectable()
 export class HelperNumberService implements IHelperNumberService {
@@ -14,8 +14,8 @@ export class HelperNumberService implements IHelperNumberService {
   }
 
   random(length: number): number {
-    const min: number = Number.parseInt(`1`.padEnd(length, '0'), 10);
-    const max: number = Number.parseInt(`9`.padEnd(length, '9'), 10);
+    const min: number = Number.parseInt(`1`.padEnd(length, "0"), 10);
+    const max: number = Number.parseInt(`9`.padEnd(length, "9"), 10);
     return this.randomInRange(min, max);
   }
 
