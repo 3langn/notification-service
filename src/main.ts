@@ -10,6 +10,7 @@ import * as compression from "compression";
 import rateLimit from "express-rate-limit";
 
 import { AppModule } from "./app.module";
+import { RequestMiddlewareModuleConfig } from "./common/request/middleware/request.middleware.module";
 import { ApiConfigService } from "./shared/services/api-config.service";
 import { SharedModule } from "./shared/shared.module";
 import swaggerInit from "./swagger";
@@ -26,18 +27,7 @@ async function bootstrap() {
 
   const configService = app.select(SharedModule).get(ApiConfigService);
 
-  // const _ = app.connectMicroservice({
-  //   transport: Transport.RMQ,
-  //   options: {
-  //     urls: [configService.rabbitmqConfig.uri],
-  //     queue: configService.rabbitmqConfig.queueName,
-  //     queueOptions: { durable: false },
-  //   },
-  // });
-
-  // await app.startAllMicroservices();
-
-  // requestMiddlewareModuleConfig(app);
+  RequestMiddlewareModuleConfig(app);
   app.setGlobalPrefix(configService.appConfig.prefix);
 
   app.use(

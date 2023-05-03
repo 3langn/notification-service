@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Logger } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 
 import { PaginationQuery } from "../../../common/pagination/decorators/pagination.decorator";
@@ -6,6 +6,7 @@ import { PaginationListDto } from "../../../common/pagination/dtos/pagination.li
 import { ResponsePaging } from "../../../common/response/decorators/response.decorator";
 import type { IResponsePaging } from "../../../common/response/interfaces/response.interface";
 import { ApiConfigService } from "../../../shared/services/api-config.service";
+import { MessageService } from "../../rmq/services/rmq.service";
 import {
   NOTIFICATION_DEFAULT_AVAILABLE_ORDER_BY,
   NOTIFICATION_DEFAULT_AVAILABLE_SEARCH,
@@ -20,9 +21,12 @@ import { NotificationService } from "../services/notification.service";
 @ApiTags("notifications")
 @Controller("/notifications")
 export class NotificationController {
+  private readonly logger = new Logger(NotificationController.name);
+
   constructor(
     private readonly configService: ApiConfigService,
     private readonly notificationService: NotificationService,
+    private readonly messageService: MessageService,
   ) {}
 
   @NotificationListDoc()

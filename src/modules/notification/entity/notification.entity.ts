@@ -3,8 +3,8 @@ import { Object } from "lodash";
 
 import { DatabaseMongoUUIDEntityAbstract } from "../../../common/database/abstracts/mongo/entities/database.mongo.uuid.entity.abstract";
 import { DatabaseEntity } from "../../../common/database/decorators/database.decorator";
+import { ENUM_NOTIFICATION_CHANNEL } from "../constants/notification.channel.constant";
 import {
-  ENUM_NOTIFICATION_CHANNEL,
   ENUM_NOTIFICATION_STATUS,
   ENUM_NOTIFICATION_TYPE,
 } from "../constants/notification.constant";

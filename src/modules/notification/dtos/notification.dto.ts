@@ -4,6 +4,8 @@ import { Exclude } from "class-transformer";
 
 import { ResponseIdSerialization } from "../../../common/response/serializations/response.id.serialization";
 import { ENUM_NOTIFICATION_TYPE } from "../constants/notification.constant";
+import { CreateNotiDto } from "./notification-create.dto";
+import type { PlaceOrderData } from "./notificationType.dto";
 
 export class NotificationResponseDto extends ResponseIdSerialization {
   @ApiProperty({
@@ -43,4 +45,8 @@ export class ListNotificationsResponseDto {
     required: true,
   })
   notifications: NotificationResponseDto[];
+}
+
+export class PlaceOrderNotificationPayloadDto extends CreateNotiDto {
+  data: PlaceOrderData;
 }

@@ -7,12 +7,6 @@ export enum ENUM_NOTIFICATION_STATUS {
   READ = "read",
 }
 
-export enum ENUM_NOTIFICATION_CHANNEL {
-  EMAIL = "email",
-  SMS = "sms",
-  PUSH = "push",
-}
-
 export enum ENUM_NOTIFICATION_TYPE {
   PASSWORD_RESET = "password_reset",
   EMAIL_VERIFICATION = "email_verification",
@@ -20,7 +14,6 @@ export enum ENUM_NOTIFICATION_TYPE {
   PLACE_ORDER = "place_order",
   CANCEL_ORDER = "cancel_order",
   UPDATE_ORDER = "update_order",
-  CANCLE_ORDER = "cancle_order",
 }
 
 export const NOTIFICATION_DEFAULT_ORDER_BY = "created_at";

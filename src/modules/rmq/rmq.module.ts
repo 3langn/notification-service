@@ -25,8 +25,10 @@ import { MessageService } from "./services/rmq.service";
       inject: [ApiConfigService],
       imports: [SharedModule],
     }),
+    MessageModule,
   ],
   controllers: [MessageController],
   providers: [MessageService],
+  exports: [MessageService],
 })
 export class MessageModule {}
