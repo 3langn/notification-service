@@ -29,8 +29,8 @@ export function PaginationSearchPipe(availableSearch: string[]): Type<PipeTransf
 
       return {
         ...value,
-        _search: search,
-        _availableSearch: availableSearch,
+        search,
+        availableSearch,
       };
     }
   }

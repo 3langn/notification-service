@@ -20,23 +20,22 @@ export function PaginationPagingPipe(defaultPerPage: number): Type<PipeTransform
       const page: number = this.paginationService.page(
         this.helperNumberService.create(value?.page ?? 1),
       );
-      const perPage: number = this.paginationService.perPage(
+      const limit: number = this.paginationService.limit(
         this.helperNumberService.create(value?.perPage ?? defaultPerPage),
       );
-      const offset: number = this.paginationService.offset(page, perPage);
+      const offset: number = this.paginationService.offset(page, limit);
 
       this.request.__pagination = {
         ...this.request.__pagination,
         page,
-        perPage,
+        limit,
       };
 
       return {
         ...value,
         page,
-        perPage,
-        _limit: perPage,
-        _offset: offset,
+        limit,
+        offset,
       };
     }
   }

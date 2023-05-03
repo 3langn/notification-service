@@ -4,7 +4,7 @@ import { ApiTags } from "@nestjs/swagger";
 import { Response } from "../../../common/response/decorators/response.decorator";
 import { ApiConfigService } from "../../../shared/services/api-config.service";
 import { HealthCheckDoc } from "../docs/heath.doc";
-import { HealtchCheckResponseDto } from "../dto/heath.dto";
+import { HealtchCheckResponseDto } from "../dtos/heath.dto";
 
 @ApiTags("health")
 @Controller("/health")

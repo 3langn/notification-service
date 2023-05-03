@@ -5,7 +5,7 @@ import { Reflector } from "@nestjs/core";
 import type { ClassConstructor, ClassTransformOptions } from "class-transformer";
 import { plainToInstance } from "class-transformer";
 import type { Response } from "express";
-import qs from "qs";
+import * as qs from "qs";
 import type { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { HelperArrayService } from "src/common/helper/services/helper.array.service";
@@ -22,13 +22,10 @@ import type {
   ResponsePagingSerialization,
 } from "src/common/response/serializations/response.paging.serialization";
 
-import { MessageService } from "../../../modules/rmq/services/rmq.service";
-
 @Injectable()
 export class ResponsePagingInterceptor<T> implements NestInterceptor<Promise<T>> {
   constructor(
     private readonly reflector: Reflector,
-    private readonly messageService: MessageService,
     private readonly helperArrayService: HelperArrayService,
   ) {}
 
@@ -107,7 +104,7 @@ export class ResponsePagingInterceptor<T> implements NestInterceptor<Promise<T>>
 
           const { query } = request;
 
-          delete query.perPage;
+          delete query.limit;
 
           delete query.page;
 
@@ -115,7 +112,7 @@ export class ResponsePagingInterceptor<T> implements NestInterceptor<Promise<T>>
 
           const { totalPage } = responseData._pagination;
 
-          const { perPage } = __pagination;
+          const { limit } = __pagination;
           const { page } = __pagination;
 
           const queryString = qs.stringify(query, {
@@ -125,15 +122,15 @@ export class ResponsePagingInterceptor<T> implements NestInterceptor<Promise<T>>
           const cursorPaginationMetadata: ResponsePaginationCursorSerialization = {
             nextPage:
               page < totalPage
-                ? `${__path}?perPage=${perPage}&page=${page + 1}&${queryString}`
+                ? `${__path}?limit=${limit}&page=${page + 1}&${queryString}`
                 : undefined,
             previousPage:
-              page > 1 ? `${__path}?perPage=${perPage}&page=${page - 1}&${queryString}` : undefined,
+              page > 1 ? `${__path}?limit=${limit}&page=${page - 1}&${queryString}` : undefined,
             firstPage:
-              totalPage > 1 ? `${__path}?perPage=${perPage}&page=${1}&${queryString}` : undefined,
+              totalPage > 1 ? `${__path}?limit=${limit}&page=${1}&${queryString}` : undefined,
             lastPage:
               totalPage > 1
-                ? `${__path}?perPage=${perPage}&page=${totalPage}&${queryString}`
+                ? `${__path}?limit=${limit}&page=${totalPage}&${queryString}`
                 : undefined,
           };
 

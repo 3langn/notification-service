@@ -1,5 +1,5 @@
 import type { IDatabaseFindAllOptions } from "../../../common/database/interfaces/database.interface";
-import type { NotificationEntity } from "../notification.entity.ts/notification.entity";
+import type { NotificationEntity } from "../entity/notification.entity";
 
 export interface INotificationService {
   findAll(

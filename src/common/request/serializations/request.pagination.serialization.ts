@@ -7,7 +7,7 @@ export class RequestPaginationSerialization {
 
   page: number;
 
-  perPage: number;
+  limit: number;
 
   orderBy: string;
 

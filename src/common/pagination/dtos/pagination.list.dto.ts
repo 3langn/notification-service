@@ -4,20 +4,20 @@ import { IPaginationOrder } from "src/common/pagination/interfaces/pagination.in
 
 export class PaginationListDto {
   @ApiHideProperty()
-  _search: Record<string, any>;
+  search: Record<string, any>;
 
   @ApiHideProperty()
-  _limit: number;
+  limit: number;
 
   @ApiHideProperty()
-  _offset: number;
+  offset: number;
 
   @ApiHideProperty()
-  _order: IPaginationOrder;
+  orderBy: IPaginationOrder;
 
   @ApiHideProperty()
-  _availableOrderBy: string[];
+  availableOrderBy: string[];
 
   @ApiHideProperty()
-  _availableOrderDirection: ENUM_PAGINATION_ORDER_DIRECTION_TYPE[];
+  availableOrderDirection: ENUM_PAGINATION_ORDER_DIRECTION_TYPE[];
 }

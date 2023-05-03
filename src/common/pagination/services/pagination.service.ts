@@ -42,7 +42,7 @@ export class PaginationService implements IPaginationService {
     return page ? (page > PAGINATION_MAX_PAGE ? PAGINATION_MAX_PAGE : page) : PAGINATION_PAGE;
   }
 
-  perPage(perPage?: number): number {
+  limit(perPage?: number): number {
     return perPage
       ? perPage > PAGINATION_MAX_PER_PAGE
         ? PAGINATION_MAX_PER_PAGE

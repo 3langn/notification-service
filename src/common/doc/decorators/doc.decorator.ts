@@ -378,7 +378,7 @@ export function DocPaging<T>(messagePath: string, options: IDocPagingOptions<T>)
       description: "Search will base on _availableSearch with rule contains, and case insensitive",
     }),
     ApiQuery({
-      name: "perPage",
+      name: "limit",
       required: false,
       allowEmptyValue: true,
       example: 20,
@@ -397,7 +397,7 @@ export function DocPaging<T>(messagePath: string, options: IDocPagingOptions<T>)
       name: "orderBy",
       required: false,
       allowEmptyValue: true,
-      example: "createdAt",
+      example: "created_at",
       type: "string",
       description: "Order by base on _availableOrderBy",
     }),

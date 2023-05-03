@@ -6,7 +6,7 @@ export interface IPaginationService {
   offsetWithoutMax(page: number, perPage: number): number;
   totalPageWithoutMax(totalData: number, perPage: number): number;
   page(page?: number): number;
-  perPage(perPage?: number): number;
+  limit(perPage?: number): number;
   order(
     orderByValue?: string,
     orderDirectionValue?: string,

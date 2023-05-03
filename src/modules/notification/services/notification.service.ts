@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 
 import type { IDatabaseFindAllOptions } from "../../../common/database/interfaces/database.interface";
+import type { NotificationEntity } from "../entity/notification.entity";
 import type { INotificationService } from "../interfaces/notification.service.interface";
-import type { NotificationEntity } from "../notification.entity.ts/notification.entity";
 import { NotificationRepository } from "../repositories/notification.repository";
 
 @Injectable()
